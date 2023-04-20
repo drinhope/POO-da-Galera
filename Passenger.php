@@ -14,11 +14,31 @@ class Passenger{
 
 
 // Constructor
-public function __construct(string $p_CPF,string $p_nationality, DateTime $p_birth_date, string $p_email, bool $p_VIP,array $p_ticket_history){
-  
+  public function __construct(string $p_CPF,string $p_nationality, DateTime $p_birth_date, string $p_email, bool $p_VIP,array $p_ticket_history){
+
+  //Methods
+
+  public function birth_date_validation(DateTime $p_birth_date, int $min_age = 0): bool
+  {
+    $currentDate = new DateTime();
+    $age = $currentDate->diff($birth_date)->y;
+
+    return $age >= $min_age; // Return true if age is greater than or equal to the minimum age, false otherwise
+  }
+    
+  public function email_validation(string $p_email): bool
+  {
+    if (!preg_match("/^[^\s@]+@[^\s@]+\.[^\s@]+$/", $p_email)) 
+    {
+    return false;
+    } else
+    {
+      return true;
+    }
+  }
+    
   public function cpf_validation (string $p_CPF) : bool {
   
-  }
   $this->CPF = $p_CPF;
   $this->nationality = $p_nationality;
   
@@ -87,6 +107,5 @@ public function __construct(string $p_CPF,string $p_nationality, DateTime $p_bir
   public function setTicketHistory(array $ticket_history): void {
     $this->ticket_history = $ticket_history;
   }
-//Methods
 };
 ?>
