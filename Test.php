@@ -49,11 +49,12 @@ include_once("Passenger.php");
   $teste_passenger = array("a","b","c");
   $passenger = new Passenger ("12345678-00","Brasileiro", $date_passenger,     "seila@gmail.com","False",$teste_passenger);
   print_r($passenger);
-  
+
+
 ?>
 
-<!--
-Função de Validação do CPF -- Está funcional, faltam adicionar os throws
+
+<!-- Função de Validação do CPF -- Está funcional, faltam adicionar os throws
 function cpf_validation (string $p_CPF) : bool{
   if (strlen($CPF_numbers) != 11 || preg_match('/([0-9])\1{10}/',      $CPF_numbers)) {
     return false;
