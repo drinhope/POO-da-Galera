@@ -12,7 +12,7 @@ private string $state;
     if(strlen($p_short_name) > 3){
         echo "Error! Airport Short Name has invalid length";
       }
-        for ($i = 0; $i < strlen($p_string); $i++) {  
+        for ($i = 0; $i < strlen($p_short_name); $i++) {  
           $char[$i] = $p_short_name[$i];
         if (!ctype_alpha($char)) {
           echo "Error! Airport Short Name contains numbers";
