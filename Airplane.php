@@ -9,9 +9,9 @@ class Airplane {
   private string $short_name;
  
   //Methods
-  public function __construct(string $p_manufacture, string $p_model, int $p_passenger_capacity, 
+  public function __construct(string $p_manufacturer, string $p_model, int $p_passenger_capacity, 
   int $p_cargo_capacity, string $p_plane_register, string $p_short_name) {
-    $this->manufacture = $p_manufacture;
+    $this->manufacturer = $p_manufacturer;
     $this->model = $p_model;
     $this->passenger_capacity = $p_passenger_capacity;
     $this->cargo_capacity = $p_cargo_capacity;
@@ -24,11 +24,11 @@ class Airplane {
   }
   
   public function get_manufacture() : string {
-    return $this->manufacture;
+    return $this->manufacturer;
   }
   
   public function set_manufacture($p_manufacture) : void {
-    $this->manufacture = $p_manufacture;
+    $this->manufacturer = $p_manufacture;
   }
 
   public function get_model() : string {
