@@ -1,8 +1,44 @@
+
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- ticket_code: int
+- arrival: Airport
+- departure: Airport
+- travel: Travel
+- connection: Travel
+- client: Client
+- passenger: Passenger
+- value: int PASSAGEN TRAVEL + CONEXAO + LUGGAGE
+- seat: int
+- connection_seat: int
+- luggage_franchise: int
+- ticket_status: enum; POSSIBILIDADES DE ACORDO COM PEDIDO DO PROFESSOR
+
+
++ set_ticket_code(): string TRAVEL CODE + SEAT (3 DIGITOS)
++ buy_luggage_franchise(int): void
++ change_status(string): void MUDA O ENUM DE STATUS DO TICKET
++ add_prices (): void SOMA TRAVEL + CONNECTION + LUGGAGE
+
+*/
+
+
 <?php
 
 include_once("Flight.php");
 
-class Ticket extends Flight {
+class Ticket {
   
   enum passenger_status
   {

@@ -1,3 +1,31 @@
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- name: string
+- code: string
+- company_name: string
+- CNPJ: string
+- short_name: string
+- airplane_list: array <Airplane>
+- luggage_price: int
+
+
++ sn_validation (string):bool   VALIDA O SN CONFORME PEDIDO PELO PROFESSOR
++ view_airplane_list(): void
++ add_airplane(Airplane): void
++ remove_airplane(Airplane):void 
+
+*/
 
 <?php
 //CRIAR UM ARRAY DE VOOS DA COMPANHIA

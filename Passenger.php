@@ -1,3 +1,34 @@
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- VIP: bool
+- name: string
+- last_name: string
+- id: sreing
+- CPF: string
+- nationality: string
+- birth_date: DateTime
+- email: string
+- tickets_history: array<Ticket> TODOS OS TICKETS QUE ELE JA VIAJOU
+
+
++ birth_date_validation (string):bool CHATGPT
++ cpf_validation (string):bool CHATGPT
++ email_validation (string):bool CHATGPT
+
+*/
+
+
 <?php
 /*Mateus*/
 

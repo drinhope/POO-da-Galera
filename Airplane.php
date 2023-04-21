@@ -1,3 +1,26 @@
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- manufacturer: string
+- model: string
+- passenger_capacity: int
+- cargo_capacity: int
+- plane_register: string
+
++ register_validation (string):bool FUNÇÃO QUE VALIDA O REGISTER CONFORME PEDIDO PELO PROFESSOR
+
+*/
+
 <?php
 class Airplane {
   //Attributes
@@ -23,11 +46,11 @@ class Airplane {
     }
   }
   
-  public function get_manufacture() : string {
+  public function get_manufacturer() : string {
     return $this->manufacturer;
   }
   
-  public function set_manufacture($p_manufacture) : void {
+  public function set_manufacturer($p_manufacture) : void {
     $this->manufacturer = $p_manufacture;
   }
 

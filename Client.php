@@ -1,3 +1,28 @@
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- name: string
+- last_name: string
+- id: string
+- tickets: array<Tickets>
+
++ purchase_ticket(): Ticket
++ change_flight(Flight): void DEPENDE DE VIP
++ cancel_flight(Flight): void DEPENDE DE VIP
++ check-in(Ticket): void DEVE CHAMAR A FUNÇÃO DO TICKET QUE ALTERA SEU ENUM PASSADO CHECKIN COMO PARAMETRO
+
+*/
+
 <?php
 
 include_once("Flight_company.php");

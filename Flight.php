@@ -1,3 +1,33 @@
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- flight_code: string
+- company: Flight_company
+- departure: Airport
+- arrival: Airport
+- time: DateTime HORA QUE ACONTECE O VOO
+- airplane: Airplane
+- weekly_frequency: array<bool> ARRAY QUE CADA POSIÇAO (0 A 6) É UM DIA DA SEMANA - TRUE = TEM O VOO NAQUELE DIA
+- duration: int
+- travel_history: Travel
+- next_travels: array<Travel>
+- active:bool
+
++ set_flight_code(): string SETA O CODE DO FLIGHT CONFORME PEDIDO PELO PROFESSOR
++ create_next_travels(): void SE O VOO TÁ ATIVO, CRIA AS TRAVELS PARA OS PROXIMOS 30 DIAS - NOTE QUE DEVE ANALISAR A FREQUENCIA SEMANAL
+
+*/
+
 <?php
 include_once("Flight_Company");
 

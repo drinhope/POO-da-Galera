@@ -1,4 +1,30 @@
-KAIQUE FUDIDO
+/*
+-------------------------------- INSTRUÇÕES --------------------------------
+
+Para melhorar a organização , siga o exemplo do arquivo Airport.php 
+e ordene o código em: atributos, construtor, destrutor e métodos (em 
+ordem getters, setters, funções), indicando com comentários a localização 
+de cada parte do código. Além disso, comente as funções e atributos, 
+explicando sucintamente a sua funcionalidade e observações.
+
+Também se atente às TABULAÇÔES!!
+
+Para este arquivo, segundo a UML, é necessário:
+
+- travel_code: string 
+- flight: Flight
+- date: DateTime DATA DO VOO
+- did_by: Airplane HERDA DE FLIGHT SE O AVIÃO NÃO FOR MUDADO NESTA TRAVEL ESPECÍFICA
+- available_seats: array<bool>
+- seat_price: int
+- luggage_value: int HERDA DA COMPANHIA DO FLIGHT
+
+
++ set_travel_code():string FLIGT CODE + 4 DIGITOS (NÚMERO DO VOO REALIZADO)
++ buy_seat(int): void ALTERA AVAILABLE_SEATS
++ check_board(array<int seat>): void RECEBE UM VETOR E COMPARA SE CADA PRA CADA TICKET VENDIDO O PASAGEIRO APARECEU - ALTERANDO O ENUM STATUS
+
+*/
 
 <?php
 include_once("Flight.php");
