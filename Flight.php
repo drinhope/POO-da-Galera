@@ -43,7 +43,7 @@ class Flight {
   private Airport $arrival;
   private DateTime $time;
   private Airplane $airplane;
-  private array $weekly_frequency; // Dias da semana (0 a 6) / true = ocorre vôo no dia
+  private array $weekly_frequency; // Dias da semana (0=SEGUNDA a 6=SÁBADO) / true = ocorre vôo no dia
   private int $duration;
   private int $ticket_price;
   private array $flight_history;
@@ -183,8 +183,23 @@ class Flight {
     return "$f_company.getShortName()" . "-" . "posicao";
   }
 
-  public create_next_travels() : void {
-    // FALTANDO
+  public function create_next_travels() : void {
+    for ($days_to_add=0; $days_to_add<=30; $days_to_add++){
+      $date = new DateTime();
+      $date->add(new DateInterval('P'. $days_to_add . 'D'));
+      $day_of_week = $date->format('N');
+      if($this->weekly_frequency(intval($day_of_week) - 1) == true){
+        for($i = 0; $i < count($this.getTravels()); $activei++){
+          if($this->getTravels[$i].getDate() == $date){
+            break;
+          }else{
+            $new_travel = new Travel($this, $date);
+            array_push($this.travels, $new_travel);
+            break;
+          }
+        }
+      }
+    }
   }
   
 
