@@ -74,8 +74,7 @@ class Flight {
       $this->weekly_frequency = $f_weekly_frequency;
       $this->duration = $f_duration;
       $this->ticket_price = $f_ticket_price;
-      array $flight_history = null;
-      array $next_travels = null;
+      $this->$travels;
       $this->active = $f_active;
   }
 
@@ -122,14 +121,10 @@ class Flight {
     return $this->ticket_price;
   }
 
-  public function getFlightHistory() : array {
-    return $this->flight_history;
+  public function getTravels() : array {
+    return $this->travels;
   }
 
-  public function getNextTravels() : array {
-    return $this->next_travels;
-  }
-  
   public function getActive() : bool {
     return $this->active;
   }
@@ -172,12 +167,8 @@ class Flight {
     $this->ticket_price = $f_ticket_price;
   }
 
-  public function setFlightHistory(array $f_flight_history) : void {
-    $this->flight_history = $f_flight_history;
-  }
-
-  public function setNextTravels(array $f_next_travels) : void {
-    $this->next_travels = $f_f_next_travels;
+  public function setTravels(array $f_travels) : void {
+    $this->travels = $f_travels;
   }
   
   public function getActive(bool $f_active) : void {
@@ -188,12 +179,12 @@ class Flight {
   // Methods
 
   public function set_flight_code(Flight_company $f_company) : string {
-    int $posicao = sprintf('%04d', array_search('$this', '$f_company.getFlights');
-    return '$f_company.getShortName()' + '-' + 'posicao';
+    string $posicao = sprintf('%04d', array_search('$this', '$f_company.getFlights');
+    return "$f_company.getShortName()" . "-" . "posicao";
   }
 
   public create_next_travels() : void {
-    doidera 
+    // FALTANDO
   }
   
 
