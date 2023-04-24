@@ -19,6 +19,7 @@ Para este arquivo, segundo a UML, é necessário:
 - airplane: Airplane
 - weekly_frequency: array<bool> ARRAY QUE CADA POSIÇAO (0 A 6) É UM DIA DA SEMANA - TRUE = TEM O VOO NAQUELE DIA
 - duration: int
+- ticket_price: int
 - travel_history: Travel
 - next_travels: array<Travel>
 - active:bool
@@ -30,131 +31,171 @@ Para este arquivo, segundo a UML, é necessário:
 
 <?php
 include_once("Flight_Company");
+include_once("Travel");
 
-class Flight {
-  //attributes
+class Flight { 
+
+  //Attributes
+
   private string $flight_code;
+  private Flight_company $company;
   private Airport $departure;
   private Airport $arrival;
   private DateTime $time;
-  private Flight_company $company;
   private Airplane $airplane;
-  private array $weekly_frequency; //Ideia de struct substituida: 7 posições 0...6 (dias da semana)
+  private array $weekly_frequency; // Dias da semana (0 a 6) / true = ocorre vôo no dia
   private int $duration;
+  private int $ticket_price;
   private array $flight_history;
   private array $next_travels;
   private bool $active;
-  private array $seats;
 
-  // Constructor
+
+  // Constructor and destructor
+
   public function __construct(
-    string $p_flight_code, 
-    Airport $p_departure, 
-    Airport $p_arrival, 
-    DateTime $p_time, 
-    Flight_company $p_company, 
-    Airplane $p_airplane, 
-    array $p_weekly_frequency, 
-    int $p_duration, 
-    array $p_flight_history,
-    array $p_next_travels,
-    bool $p_active,
-    array $p_seats
-  ) {
-    $this->flight_code = $p_flight_code;
-    $this->departure = $p_departure;
-    $this->arrival = $p_arrival;
-    $this->time = $p_time;
-    $this->company = $p_company;
-    $this->airplane = $p_airplane;
-    $this->weekly_frequency = $p_weekly_frequency;
-    $this->duration = $p_duration;
-    $this->flight_history = $p_flight_history;
-    $this->seats = $p_seats;
-    $this->active = $p_active;
-    $this->next_travels = $p_next_travels; //NA VERDADE, DEVE CHAMAR A FUNÇÃO QUE CRIA OS TRAVELS (SE ACTIVE = TRUE)
+    string $f_flight_code,
+    Flight_company $f_company,
+    Airport $f_departure,
+    Airport $f_arrival,
+    DateTime $f_time,
+    Airplane $f_airplane,
+    array $f_weekly_frequency,
+    int $f_duration,
+    int $f_ticket_price,
+    bool $f_active,
+    ){ 
+      $this->flight_code = this->set_flight_code($f_company);
+      $this->company = $f_company;
+      $this->departure = $f_departure;
+      $this->arrival = $f_arrival;
+      $this->time = $f_time;
+      $this->airplane = $f_airplane;
+      $this->weekly_frequency = $f_weekly_frequency;
+      $this->duration = $f_duration;
+      $this->ticket_price = $f_ticket_price;
+      array $flight_history = null;
+      array $next_travels = null;
+      $this->active = $f_active;
   }
 
-  // Getters
-  public function getFlightCode(): string {
+  public function __destruct() {
+    
+  }
+
+  
+  // Getters e setters
+
+  public function getFlightCode() : string {
     return $this->flight_code;
   }
 
-  public function getDeparture(): Airport {
-    return $this->departure;
-  }
-
-  public function getArrival(): Airport {
-    return $this->arrival;
-  }
-
-  public function getTime(): DateTime {
-    return $this->time;
-  }
-
-  public function getCompany(): Flight_company {
+  public function getCompany() : Flight_company {
     return $this->company;
   }
 
-  public function getAirplane(): Airplane {
+  public function getDeparture() : Airport {
+    return $this->departure;
+  }
+
+  public function getArrival() : Airport {
+    return $this->arrival;
+  }
+
+  public function getTime() : DateTime {
+    return $this->time;
+  }
+
+  public function getAirplane() : Airplane {
     return $this->airplane;
   }
 
-  public function getWeeklyFrequency(): array {
+  public function getWeeklyFrequency() : array {
     return $this->weekly_frequency;
   }
 
-  public function getDuration(): int {
+  public function getDuration() : int {
     return $this->duration;
   }
 
-  public function getFlightHistory(): array {
+  public function getTicketPrice() : int {
+    return $this->ticket_price;
+  }
+
+  public function getFlightHistory() : array {
     return $this->flight_history;
   }
 
-  // Setters
-  public function setDeparture(Airport $p_departure): void {
-    $this->departure = $p_departure;
+  public function getNextTravels() : array {
+    return $this->next_travels;
+  }
+  
+  public function getActive() : bool {
+    return $this->active;
   }
 
-  public function setArrival(Airport $p_arrival): void {
-    $this->arrival = $p_arrival;
+
+
+  public function setFlightCode( string $f_flight_code) : void {
+    $this->flight_code = $f_flight_code;
   }
 
-  public function setTime(DateTime $p_time): void {
-    $this->time = $p_time;
+  public function setCompany(Flight_company $f_company) : void {
+    $this->company = $f_company;
   }
 
-  public function setCompany(Flight_company $p_company): void {
-    $this->company = $p_company;
+  public function setDeparture(Airport $f_departure) : void {
+    $this->departure = $f_departure;
   }
 
-  public function setAirplane(Airplane $p_airplane): void {
-    $this->airplane = $p_airplane;
+  public function setArrival(Airport $f_arrival) : void {
+    $this->arrival = $f_arrival;
   }
 
-  public function setWeeklyFrequency(array $p_weekly_frequency): void {
-    $this->weekly_frequency = $p_weekly_frequency;
+  public function setTime(DateTime $f_time) : void {
+    $this->time = $f_time;
   }
 
-  public function setDuration(int $p_duration): void {
-    $this->duration = $p_duration;
+  public function setAirplane(Airplane $f_airplane) : void {
+    $this->airplane = $f_airplane;
   }
 
-  public function setFlightHistory(array $p_flight_history): void {
-    $this->flight_history = $p_flight_history;
-  } 
+  public function setWeeklyFrequency(array $f_weekly_frequency) : void {
+    $this->weekly_frequency = $f_weekly_frequency;
+  }
+
+  public function setDuration(int $f_duration) : void {
+    $this->duration = $f_duration;
+  }
+
+  public function setTicketPrice(int $f_ticket_price) : void {
+    $this->ticket_price = $f_ticket_price;
+  }
+
+  public function setFlightHistory(array $f_flight_history) : void {
+    $this->flight_history = $f_flight_history;
+  }
+
+  public function setNextTravels(array $f_next_travels) : void {
+    $this->next_travels = $f_f_next_travels;
+  }
+  
+  public function getActive(bool $f_active) : void {
+    $this->active = $f_active;
+  }
+
+
   // Methods
-  public function change_airplane(Airplane $p_new_airplane){
-    $p_new_airplane = readline('Escolha o novo avião:');
-    $this->airplane = $p_new_airplane;
+
+  public function set_flight_code(Flight_company $f_company) : string {
+    int $posicao = sprintf('%04d', array_search('$this', '$f_company.getFlights');
+    return '$f_company.getShortName()' + '-' + 'posicao';
   }
 
-  public function set_flight_code(Flight_company $p_company) : string
-    {
-      return $this->flight_code = $p_company->short_name . rand(1000, 9999);
-      // ERRADO, DEVE SER NOME DA COMPANHIA CONCATENADO COM SIZEOF(ARRAY DE TRAVELS DA COMPANHIA) + 1
-    }
+  public create_next_travels() : void {
+    doidera 
+  }
+  
 
 /*
 
