@@ -1,3 +1,4 @@
+<?php
 /*
 -------------------------------- INSTRUÇÕES --------------------------------
 
@@ -21,7 +22,6 @@ Para este arquivo, segundo a UML, é necessário:
 
 */
 
-<?php
 class Airplane {
   //Attributes
   private string $manufacturer;
@@ -31,7 +31,7 @@ class Airplane {
   private string $plane_register;
   private string $short_name;
  
-  //Methods
+  //Constructor
   public function __construct(string $p_manufacturer, string $p_model, int $p_passenger_capacity, 
   int $p_cargo_capacity, string $p_plane_register, string $p_short_name) {
     $this->manufacturer = $p_manufacturer;
@@ -45,51 +45,59 @@ class Airplane {
       throw new Exception("Error! This Airplane Short Name is invalid.");
     }
   }
+
+  //Destructor 
   
+  public function __destruct() {             
+            
+  }
+  //Getters
   public function get_manufacturer() : string {
     return $this->manufacturer;
-  }
-  
-  public function set_manufacturer($p_manufacture) : void {
-    $this->manufacturer = $p_manufacture;
   }
 
   public function get_model() : string {
     return $this->model;
   }
-  
-  public function set_model($p_model) : void {
-    $this->model = $p_model;
-  }
 
   public function get_passenger_capacity() : int {
     return $this->passenger_capacity;
-  }
-  
-  public function set_passenger_capacity($p_passenger_capacity) : void {
-    $this->passenger_capacity = $p_passenger_capacity;
   }
 
   public function get_cargo_capacity() : int {
     return $this->cargo_capacity;
   }
-  
-  public function set_cargo_capacity($p_cargo_capacity) : void {
-    $this->cargo_capacity = $p_cargo_capacity;
-  }
 
   public function get_plane_register() : string {
     return $this->plane_register;
-  }
-  
-  public function set_plane_register($p_plane_register) : void {
-    $this->plane_register = $p_plane_register;
   }
     
   public function get_short_name() : string {
     return $this->short_name;
   }
   
+  //Setters
+  
+  public function set_manufacturer($p_manufacture) : void   {
+    $this->manufacturer = $p_manufacture;
+  }
+  
+  public function set_model($p_model) : void {
+    $this->model = $p_model;
+  }
+
+  public function set_passenger_capacity($p_passenger_capacity) : void {
+    $this->passenger_capacity = $p_passenger_capacity;
+  }
+  
+  public function set_cargo_capacity($p_cargo_capacity) : void {
+    $this->cargo_capacity = $p_cargo_capacity;
+  }
+  
+  public function set_plane_register($p_plane_register) : void {
+    $this->plane_register = $p_plane_register;
+  }
+
   public function set_short_name($p_short_name) : void {
     if ($this->sn_validation($p_short_name)) {
       $this->short_name = $p_short_name;
@@ -98,9 +106,7 @@ class Airplane {
     }
   }
 
-  public function __destruct() {             
-            
-  }
+  //Methods 
   public function sn_validation($a_short_name) : bool{ //Validate Airplane short name
 //tem que fazer o try catch caso a verificacao de errado
     if($a_short_name[0] != 'P'){

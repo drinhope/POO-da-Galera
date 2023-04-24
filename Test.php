@@ -52,36 +52,3 @@ include_once("Passenger.php");
 
 
 ?>
-
-
-<!-- Função de Validação do CPF -- Está funcional, faltam adicionar os throws
-function cpf_validation (string $p_CPF) : bool{
-  if (strlen($CPF_numbers) != 11 || preg_match('/([0-9])\1{10}/',      $CPF_numbers)) {
-    return false;
-    }
-    
-  $CPF_numbers = preg_replace('/[^0-9]/', "", $p_CPF);
-  
-$number_quantity_to_loop = [9, 10];
-
-foreach ($number_quantity_to_loop as $item) {
-
-    $sum = 0;
-    $number_to_multiplicate = $item + 1;
-  
-    for ($index = 0; $index < $item; $index++) {
-
-        $sum += $CPF_numbers[$index] * ($number_to_multiplicate--);
-  
-    }
-
-    $result = (($sum * 10) % 11);
-    }
-  if ($CPF_numbers[$item] != $result) {
-	 echo "CPF Inválido \n";
-    return false;
-    }else{
-    echo "CPF Válido \n";
-    return true;
-    }
-  } -->

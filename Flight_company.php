@@ -1,3 +1,4 @@
+<?php
 /*
 -------------------------------- INSTRUÇÕES --------------------------------
 
@@ -26,12 +27,7 @@ Para este arquivo, segundo a UML, é necessário:
 + remove_airplane(Airplane):void 
 
 */
-
-<?php
-//CRIAR UM ARRAY DE VOOS DA COMPANHIA
-//TEM ERRO NA CRIAÇÃO DE ARRAY AQUI!!!
-// HÁ OUTROS PROBLEMAS NO CÓDIGO, LER OS COMENTARIOS
-/* Mateus */
+  
 class flight_Company{ 
   //Properties
     private string $name;
@@ -47,10 +43,10 @@ class flight_Company{
       $this->name = $p_name;
       $this->code = $p_code;
       $this->CNPJ = $p_CNPJ;
-      if($this->sn_validation(p_short_name)){
-         $this->short_name = $p_short_name;
-      }else{
-        //ADD MENSAGEM DE ERRO QUE VEM DA EXCEÇÃO
+      if ($this->sn_validation($p_short_name)) {
+        $this->short_name = $p_short_name;
+      } else {
+        throw new Exception("Error! This Airplane Short Name is invalid.");
       }
       $this->airplane_list = $p_airplane_list;
       $this->luggage_price = $p_luggage_price;
@@ -87,7 +83,7 @@ class flight_Company{
     // Setter methods
   
     public function setLuggagePrice(int $p_luggage_price): void {
-    $this->luggage_price = $p_lugagge_price;;
+    $this->luggage_price = $p_lugagge_price;
   }
     public function setAirplaneList(array $p_airplane_list): void {
     $this->airplane_list = $p_airplane_list;
@@ -114,18 +110,18 @@ class flight_Company{
   
   
   //Methods
-    public function sn_validation(string $p_short_name){  //Validate the flight company short name
-          if(strlen($p_short_name) > 2){
-     echo "Error! Airport Short Name has invalid length";
-      }
-        for ($i = 0; $i < strlen($p_string); $i++) {  
+  public function sn_validation(string $p_short_name)  {  //Validate the flight company short name
+      if(strlen($p_short_name) > 2){
+        echo "Error! Airport Short Name has invalid length";
+        }
+      for ($i = 0; $i < strlen($p_string); $i++) {  
         $char[$i] = $p_short_name[$i];
-        if (!ctype_alpha($char)) {
+          if (!ctype_alpha($char)) {
           echo "Error! Airport Short Name contains numbers";
         }
-        }               
+      }               
   }
-
+  
     function add_airplane(Airplane $p_airplane): void{ //Add one airplane to the company's airplane list
         $airplane_list[] = $p_airplane;
     }
@@ -135,7 +131,7 @@ class flight_Company{
         unset($array[$key]);
       }                       
     }
-
+//Allow the company to view every airplane in its domain
   function view_airplane_list(): void {
     foreach ($this->airplane_list as $key => $airplane) {
         echo "$key = $airplane\n";

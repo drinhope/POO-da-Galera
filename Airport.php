@@ -1,3 +1,4 @@
+<?php
 /*
 -------------------------------- INSTRUÇÕES --------------------------------
 
@@ -18,8 +19,6 @@ Para este arquivo, segundo a UML, é necessário:
 + sn_validation (string):bool FUNÇÃO QUE VALIDA O SHORTNAME CONFORME PEDIDO PELO PROFESSOR
 
 */
-
-<?php
 
 class Airport{
 
