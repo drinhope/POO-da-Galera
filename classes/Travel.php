@@ -1,25 +1,26 @@
 <?php
 
-include_once("Flight.php");
+include_once("Global.php")
 
-class Flight extends Travel{
+class Flight extends Persist {
   //attributes
   private Flight $flight;
   private DateTime $date;
   private array $seats;
   private string $travel_code;
   private Airplane $travel_plane;
-  private array<bool> $available_seats;
-  private array< Ticket > $sold_tickets;
+  private array <bool> $available_seats;
+  private array <Ticket> $sold_tickets;
+  protected static $local_filename = "Travel.txt";
   
   //Constructor
   public function __construct(
-    Flight $p_flight;
-    DateTime $p_date;
-    array $p_seats;
-    string $p_travel_code;
-    Airplane $p_travel_plane;
-    array<bool> $p_available_seats;
+    Flight $p_flight,
+    DateTime $p_date,
+    array $p_seats,
+    string $p_travel_code,
+    Airplane $p_travel_plane,
+    array<bool> $p_available_seats
   ) {
   $this->flight = $p_flight;
   $this->date = $p_date;
@@ -28,7 +29,7 @@ class Flight extends Travel{
   $this->travel_plane = $p_travel_plane;
   
   //CHECAR ESTE LOOP
-    for($i = 0; $i < this->travel_plane.get_passenger_capacity(); i++){
+    for($i = 0; $i < this->travel_plane.get_passenger_capacity(); $i++){
       $this->available_seats[$i] = true;
     }
   }
@@ -61,13 +62,13 @@ class Flight extends Travel{
   //setters
 
   
- public function setAvailableSeats() : void{
+  public function setAvailableSeats(array<bool> $p_available_seats) : void{
     $this->available_seats = $p_available_seats;
-   
+  }
   public function setFlight(Flight $p_flight): void {
     $this->flight = $p_flight;
   }
-public function setTravelPlane() : void{
+  public function setTravelPlane($p_travel_plane) : void{
     $this->travel_plane = $p_travel_plane;
   }
   public function setDate(DateTime $p_date): void {
@@ -78,11 +79,15 @@ public function setTravelPlane() : void{
   }
 
   //methods
-  
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
+    
   public function setTravelCode(string $p_travel_code): string {
     return $this->travel_code = flight_code()."-".sizeof($p_flight_history)+1;
   }
-}
+
   public function boardRegister(Ticket $ticket) {
 
     $input = readline();
@@ -93,6 +98,6 @@ public function setTravelPlane() : void{
     {
       $ticket->setStatus(ticket_status::no_show);
     }
-    
+  }
 }  
 ?>

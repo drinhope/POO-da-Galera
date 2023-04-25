@@ -28,8 +28,9 @@ Para este arquivo, segundo a UML, é necessário:
 + email_validation (string):bool
 
 */
+include_once("Global.php")
 
-class Passenger {
+class Passenger extends Persist {
     //Attributes
     private string $CPF;
     private string $nationality;
@@ -37,6 +38,8 @@ class Passenger {
     private string $email;
     private bool $VIP;
     private array $ticket_history;
+          protected static $local_filename = "Passenger.txt";
+
 
     // Constructor
     public function __construct(string $p_CPF, string $p_nationality, DateTime $p_birth_date, string $p_email, bool $p_VIP, array $p_ticket_history) {
@@ -102,6 +105,11 @@ class Passenger {
   }
   
   //Methods
+
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
   
   public function birth_date_validation(DateTime $p_birth_date, int $min_age = 0): bool
   {

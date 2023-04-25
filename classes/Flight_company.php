@@ -8,7 +8,7 @@ ordem getters, setters, funções), indicando com comentários a localização
 de cada parte do código. Além disso, comente as funções e atributos, 
 explicando sucintamente a sua funcionalidade e observações.
 
-Também se atente às TABULAÇÔES!!
+Também se atente às **TABULAÇÔES**!!
 
 Para este arquivo, segundo a UML, é necessário:
 
@@ -27,8 +27,10 @@ Para este arquivo, segundo a UML, é necessário:
 + remove_airplane(Airplane):void 
 
 */
-  
-class flight_Company{ 
+
+include_onde("Global.php")
+
+class Flight_Company extends Persist { 
   //Properties
     private string $name;
     private string $code;
@@ -37,6 +39,7 @@ class flight_Company{
     private string $company_name;
     private array $airplane_list;
     private int $luggage_price;
+    protected static $local_filename = "Flight_company.txt";
   
   //Constructor
     public function __construct(string $p_name, string $p_code, string $p_CNPJ, string $p_short_name, array $p_airplane_list, int $p_luggage_price){
@@ -110,6 +113,12 @@ class flight_Company{
   
   
   //Methods
+
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
+  
   public function sn_validation(string $p_short_name)  {  //Validate the flight company short name
       if(strlen($p_short_name) > 2){
         echo "Error! Airport Short Name has invalid length";

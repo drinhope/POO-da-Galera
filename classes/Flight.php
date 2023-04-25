@@ -1,3 +1,4 @@
+<?php
 /*
 -------------------------------- INSTRUÇÕES --------------------------------
 
@@ -29,11 +30,10 @@ Para este arquivo, segundo a UML, é necessário:
 
 */
 
-<?php
-include_once("Flight_Company");
-include_once("Travel");
+include_once("Global.php")
 
-class Flight { 
+
+class Flight extends Persist { 
 
   //Attributes
 
@@ -49,6 +49,7 @@ class Flight {
   private array $flight_history;
   private array $next_travels;
   private bool $active;
+  protected static $local_filename = "Flight.txt";
 
 
   // Constructor and destructor
@@ -177,10 +178,19 @@ class Flight {
 
 
   // Methods
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
 
   public function set_flight_code(Flight_company $f_company) : string {
     string $posicao = sprintf('%04d', array_search('$this', '$f_company.getFlights');
     return "$f_company.getShortName()" . "-" . "posicao";
+  }
+
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
   }
 
   public function create_next_travels() : void {
@@ -189,7 +199,7 @@ class Flight {
       $date->add(new DateInterval('P'. $days_to_add . 'D'));
       $day_of_week = $date->format('N');
       if($this->weekly_frequency(intval($day_of_week) - 1) == true){
-        for($i = 0; $i < count($this.getTravels()); $activei++){
+        for($i = 0; $i < count($this.getTravels()); $i++){
           if($this->getTravels[$i].getDate() == $date){
             break;
           }else{

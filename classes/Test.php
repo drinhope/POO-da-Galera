@@ -1,11 +1,5 @@
 <?php
-include_once("Airplane.php");
-include_once("Airport.php");
-include_once("Flight_company.php");
-include_once("Client.php");
-include_once("Flight.php");
-include_once("Ticket.php");
-include_once("Passenger.php");
+include_once("Global.php")
 
 //Teste da Airplane
 

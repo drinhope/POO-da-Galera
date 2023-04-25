@@ -19,15 +19,16 @@ Para este arquivo, segundo a UML, é necessário:
 + sn_validation (string):bool FUNÇÃO QUE VALIDA O SHORTNAME CONFORME PEDIDO PELO PROFESSOR
 
 */
+include_once("Global.php");
 
-class Airport{
+class Airport extends Persist {
 
   //Attributes
   
   private string $short_name;
   private string $city;
   private string $state;
-
+  protected static $local_filename = "Airport.txt";
 
   //Constructor and drestructor
   
@@ -67,6 +68,11 @@ class Airport{
 
 
   //Methods
+
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
   
   public function setState(string $p_state): void  {
     $this->short_name = $p_state;

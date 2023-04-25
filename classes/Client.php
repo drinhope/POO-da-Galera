@@ -24,14 +24,15 @@ Para este arquivo, segundo a UML, é necessário:
 
 */
 
-include_once("Flight_company.php");
+include_once("Global.php")
 
-class Client {
+class Client extends Persist {
     // Attributes
     private string $name;
     private string $last_name;
     private string $id;
     private array $tickets;
+    protected static $local_filename = "Client.txt";
     
 
     // Constructor
@@ -82,7 +83,10 @@ class Client {
         $this->tickets = $tickets;
     }
     // Methods
-
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
     public function purchase_ticket(string $p_name, string $p_last_name, string $p_id, flight_Company $p_flight_company, bool $p_vip_status)
   {     
         //IMPLEMENTAR LOGICA DOS AVAILABLE SEATS AQUI

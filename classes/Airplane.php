@@ -22,7 +22,9 @@ Para este arquivo, segundo a UML, é necessário:
 
 */
 
-class Airplane {
+include_once("Global.php")
+
+class Airplane extends Persist {
   //Attributes
   private string $manufacturer;
   private string $model;
@@ -30,6 +32,7 @@ class Airplane {
   private int $cargo_capacity;
   private string $plane_register;
   private string $short_name;
+  protected static $local_filename = "Airplane.txt";
  
   //Constructor
   public function __construct(string $p_manufacturer, string $p_model, int $p_passenger_capacity, 
@@ -107,6 +110,10 @@ class Airplane {
   }
 
   //Methods 
+  static public function getFilename() 
+  {
+      return get_called_class()::$local_filename;
+  }
   public function sn_validation($a_short_name) : bool{ //Validate Airplane short name
 //tem que fazer o try catch caso a verificacao de errado
     if($a_short_name[0] != 'P'){

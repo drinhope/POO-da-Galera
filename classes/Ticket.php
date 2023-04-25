@@ -28,15 +28,14 @@ Para este arquivo, segundo a UML, é necessário:
 
 + set_ticket_code(): string TRAVEL CODE + SEAT (3 DIGITOS) [X]
 + buy_luggage_franchise(int): void [X]
-+ change_status(string): void MUDA O ENUM DE STATUS DO TICKET []
++ change_status(string): void MUDA O ENUM DE STATUS DO TICKET [X]
 + add_prices (): void SOMA TRAVEL + CONNECTION + LUGGAGE [X]
 
 */
-include_once("Flight.php"); 
-include_once ("Travel.php");
-include_once ("Flight_company.php")
+include_once("Global.php")
 
-class Ticket {
+
+class Ticket extends Persist {
   
   enum ticket_status
   {
@@ -72,6 +71,7 @@ class Ticket {
   private array $connections;
   private array $flights;
   private $status;
+  protected static $local_filename = "Ticket.txt";
 
   //Constructor
   public function __construct(string $p_ticketcode, Airport $p_arrival, Airport $p_departure, Travel $p_travel,        Travel $p_connection, Client $p_client, Passenger $p_passenger, int $p_value, int $p_luggage_franchise = 0, int      $p_seat, array $p_connections [], array $p_flights []) {
@@ -198,7 +198,9 @@ class Ticket {
   }
 
   //Methods
-
+  static public function getFilename()  {
+      return get_called_class()::$local_filename;
+  }
   public function setTicketCode(string $travel_code, int $seat){
     return this->ticket_code = travel_code().str_pad ( $seat, 3, "0", STR_PAD_LEFT);
   }
