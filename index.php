@@ -1,4 +1,6 @@
-<!--https://app.diagrams.net/?src=about#G1JglpSukGGnd9RMWANopGpVYefP37g_5O
+<!--
+https://app.diagrams.net/?src=about#G1JglpSukGGnd9RMWANopGpVYefP37g_5O
+https://docs.google.com/spreadsheets/d/1z7_XxJkZsolySpGdkKvccf3dEG6f0ZhmCFFlcikD5jM/edit?usp=sharing
 -->
 <html>
   <head>

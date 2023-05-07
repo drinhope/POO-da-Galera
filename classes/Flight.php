@@ -30,7 +30,7 @@ Para este arquivo, segundo a UML, é necessário:
 
 */
 
-include_once("Global.php")
+include_once("Global.php");
 
 
 class Flight extends Persist { 

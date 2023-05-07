@@ -1,6 +1,8 @@
 <?php
-include_once("Global.php")
 
+include_once("Flight.php");
+include_once("Airplane.php");
+include_once("Travel.php");
 //Teste da Airplane
 
   $airplane = new Airplane('Boeing','737','300','600','1234', 'PR-GR1U');
@@ -17,8 +19,6 @@ include_once("Global.php")
   print_r($client);
 
 //Teste da Flight Company
-// Nesse teste, está faltando incluir o airplane_list, que nao está funcionando -- problema com arrays
-// Assim, não dá para testar as funções da flight_company
   
   $flight_company = new Flight_company('LATAM Airlines Group', '1234', '56785678567856','LATAM', $airplane ,'80');
   print_r($flight_company);
@@ -44,5 +44,12 @@ include_once("Global.php")
   $passenger = new Passenger ("12345678-00","Brasileiro", $date_passenger,     "seila@gmail.com","False",$teste_passenger);
   print_r($passenger);
 
-
+// Teste da Travel
+   $flight = new Flight ("1234","Aeroporto A","Aeroporto B","");
+   $date = new Datetime();
+   $airplane = new Airplane('Boeing','737','300','600','1234', 'PR-GR1U');
+ $array_ = array();
+ $tripulation = array();
+ $travel = new Travel ("1234",$flight,$date,$airplane,$array_, 200,$tripulation);
+  print_r($travel);
 ?>

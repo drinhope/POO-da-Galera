@@ -1,37 +1,12 @@
 <?php
-/*
--------------------------------- INSTRUÇÕES --------------------------------
 
-Para melhorar a organização , siga o exemplo do arquivo Airport.php 
-e ordene o código em: atributos, construtor, destrutor e métodos (em 
-ordem getters, setters, funções), indicando com comentários a localização 
-de cada parte do código. Além disso, comente as funções e atributos, 
-explicando sucintamente a sua funcionalidade e observações.
-
-Também se atente às TABULAÇÔES!!
-
-Para este arquivo, segundo a UML, é necessário:
-
-- VIP: bool
-- name: string
-- last_name: string
-- id: sreing
-- CPF: string
-- nationality: string
-- birth_date: DateTime
-- email: string
-- tickets_history: array<Ticket> TODOS OS TICKETS QUE ELE JA VIAJOU
-
-
-+ birth_date_validation (string):bool
-+ cpf_validation (string):bool
-+ email_validation (string):bool
-
-*/
 include_once("Global.php")
 
 class Passenger extends Persist {
     //Attributes
+    private string $name;
+    private string $last_name;
+    private string $id;
     private string $CPF;
     private string $nationality;
     private DateTime $birth_date;
@@ -40,69 +15,96 @@ class Passenger extends Persist {
     private array $ticket_history;
           protected static $local_filename = "Passenger.txt";
 
-
     // Constructor
-    public function __construct(string $p_CPF, string $p_nationality, DateTime $p_birth_date, string $p_email, bool $p_VIP, array $p_ticket_history) {
+    public function __construct(string $p_name, string $p_last_name, string $p_id, string $p_CPF, string $p_nationality, DateTime $p_birth_date, string $p_email, bool $p_VIP) {
+        $this->name = $p_name;
+        $this->last_name = $p_last_name;
+        $this->id = $p_id;
         $this->CPF = $p_CPF;
         $this->nationality = $p_nationality;
         $this->birth_date = $p_birth_date;
         $this->email = $p_email;
         $this->VIP = $p_VIP;
-        $this->ticket_history = $p_ticket_history;
+        $this->ticket_history = array();
     }
   
-  public function __destruct() 
-  {
-  }
-  // Getters
-  public function getCPF(): string {
-      return $this->CPF;
-  }
+    public function __destruct() 
+    {
+    }
   
-  public function getNationality(): string {
-      return $this->nationality;
-  }
+    // Getters
+    public function getName(): string {
+        return $this->name;
+    }
   
-  public function getBirthDate(): DateTime {
-      return $this->birth_date;
-  }
+    public function getLastName(): string {
+        return $this->last_name;
+    }
   
-  public function getEmail(): string {
-      return $this->email;
-  }
+    public function getID(): string {
+        return $this->id;
+    }
   
-  public function isVIP(): bool {
-      return $this->VIP;
-  }
+    public function getCPF(): string {
+        return $this->CPF;
+    }
   
-  public function getTicketHistory(): array {
-      return $this->ticket_history;
-  }
+    public function getNationality(): string {
+        return $this->nationality;
+    }
   
-  // Setters
-  public function setCPF(string $CPF): void {
-      $this->CPF = $CPF;
-  }
+    public function getBirthDate(): DateTime {
+        return $this->birth_date;
+    }
   
-  public function setNationality(string $nationality): void {
-      $this->nationality = $nationality;
-  }
+    public function getEmail(): string {
+        return $this->email;
+    }
   
-  public function setBirthDate(DateTime $birth_date): void {
-      $this->birth_date = $birth_date;
-  }
+    public function isVIP(): bool {
+        return $this->VIP;
+    }
   
-  public function setEmail(string $email): void {
-      $this->email = $email;
-  }
+    public function getTicketHistory(): array {
+        return $this->ticket_history;
+    }
   
-  public function setVIP(bool $VIP): void {
-      $this->VIP = $VIP;
-  }
+    // Setters
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
   
-  public function setTicketHistory(array $ticket_history): void {
-      $this->ticket_history = $ticket_history;
-  }
+    public function setLastName(string $last_name): void {
+        $this->last_name = $last_name;
+    }
+  
+    public function setID(string $id): void {
+        $this->id = $id;
+    }
+  
+    public function setCPF(string $CPF): void {
+        $this->CPF = $CPF;
+    }
+  
+    public function setNationality(string $nationality): void {
+        $this->nationality = $nationality;
+    }
+  
+    public function setBirthDate(DateTime $birth_date): void {
+        $this->birth_date = $birth_date;
+    }
+  
+    public function setEmail(string $email): void {
+        $this->email = $email;
+    }
+  
+    public function setVIP(bool $VIP): void {
+        $this->VIP = $VIP;
+    }
+  
+    public function setTicketHistory(array $ticket_history): void {
+        $this->ticket_history = $ticket_history;
+    }
   
   //Methods
 

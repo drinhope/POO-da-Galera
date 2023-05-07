@@ -57,6 +57,7 @@ class Ticket extends Persist {
     }
 
   //Properties
+  private bool $vip_status;
   private string $ticketcode;
   private Airport $arrival;
   private Airport $departure;
@@ -64,6 +65,7 @@ class Ticket extends Persist {
   private Travel $connection;
   private Client $client;
   private Passenger $passenger;
+  private Passenger $passenger_vip;
   private int $value;
   private int $luggage_franchise;
   private int $travel_seat;
@@ -74,15 +76,17 @@ class Ticket extends Persist {
   protected static $local_filename = "Ticket.txt";
 
   //Constructor
-  public function __construct(string $p_ticketcode, Airport $p_arrival, Airport $p_departure, Travel $p_travel,        Travel $p_connection, Client $p_client, Passenger $p_passenger, int $p_value, int $p_luggage_franchise = 0, int      $p_seat, array $p_connections [], array $p_flights []) {
-      
-  $this->ticketcode = $p_ticketcode;
+  public function __construct(bool $p_vip_status, string $p_ticketcode, Airport $p_arrival, Airport $p_departure, Travel $p_travel, Travel $p_connection, Client $p_client, Passenger $p_passenger = null, Passenger_VIP $p_passenger_vip = null, int $p_value, int $p_luggage_franchise = 0, int $p_seat, array $p_connections [], array $p_flights []) {
+
+  $this->vip_status = $p_vip_status;
+  $this->passenger_vip = $p_passenger_vip;
+  $this->passenger = $p_passenger;
+  $this->ticketcode = this->$setTicketCode;
   $this->arrival = $p_arrival;
   $this->departure = $p_departure;
   $this->travel = $p_travel;
   $this->connection = $p_connection;
   $this->client = $p_client;
-  $this->passenger = $p_passenger;
   $this->value = $p_value;
   $this->luggage_franchise = $p_luggage_franchise;
   $this->travel_seat = $p_travel_seat;
@@ -100,44 +104,52 @@ class Ticket extends Persist {
   }
 
   //Getters
+  public function getVip_status(): bool{
+    return $this->vip_status;
+  }
+
   public function getTicketCode():string{
-    return this->ticketcode;
+    return $this->ticketcode;
   }
 
   public function getArrival():Airport{
-    return this->arrival;
+    return $this->arrival;
   }
 
   public function getDeparture():Airport{
-    return this->departure;
+    return $this->departure;
   }
 
   public function getClient():Client{
-    return this->client;
+    return $this->client;
   }
 
   public function getPassenger():Passenger{
-    return this->passenger;
+    return $this->passenger;
+  }
+
+  public function getPassenger_vip():Passenger_VIP{
+    return $this->passenger_vip;
   }
 
   public function getValue():int{
-    return this->value;
+    return $this->value;
   }
 
   public function getLuggageFranchise():int{
-    return this->luggage_franchise;
+    return $this->luggage_franchise;
   }
 
   public function getSeat():int{
-    return this->seat;
+    return $this->seat;
   }
 
   public function getConnections():array{
-    return this->connections;
+    return $this->connections;
   }
 
   public function getFlights():array{
-    return this->flights;
+    return $this->flights;
   }
 
   //public function getStatus():enum{
@@ -145,71 +157,81 @@ class Ticket extends Persist {
   //}
 
   //Setters
-  public function setArrival(Airport $arrival) {
-    $this->arrival = $p_arrival;
+
+  public function setVip_status (bool $t_vip_status) : void {
+    $this->vip_status = $t_vip_status;
   }
 
-  public function setDeparture(Airport $departure) {
-    $this->departure = $p_departure;
+  public function setArrival(Airport $t_arrival) : void {
+    $this->arrival = $t_arrival;
   }
 
-  public function setTravel(Travel $travel) {
-    $this->travel = $p_travel;
+  public function setDeparture(Airport $t_departure) : void {
+    $this->departure = $t_departure;
   }
 
-  public function setConnection(Travel $connection) {
-    $this->connection = $p_connection;
+  public function setTravel(Travel $t_travel) : void {
+    $this->travel = $t_travel;
   }
 
-  public function setConnection(Travel $connection) {
-    $this->connection = $p_connection;
+  public function setConnection(Travel $t_connection) : void {
+    $this->connection = $t_connection;
   }
 
-  public function setClient(Client $client) {
-    $this->client = $p_client;
+  public function setConnection(Travel $t_connection) : void {
+    $this->connection = $t_connection;
   }
 
-  public function setPassenger(Passenger $passenger) {
+  public function setClient(Client $t_client) : void {
+    $this->client = $t_client;
+  }
+
+  public function setPassenger(Passenger $t_passenger) : void {
     $this->passenger = $p_passenger;
   }
 
-  public function setValue(int $value) {
-    $this->value = $p_value;
+  public function setPassenger_vip(Passenger $t_passenger_vip) : void {
+    $this->passenger_vip = $p_passenger_vip;
   }
 
-  public function setLugaggeFranchise(int $lugagge_franchise) {
-    $this->lugagge_franchise = $p_lugagge_franchise;
+  public function setValue(int $t_value) : void{
+    $this->value = $t_value;
   }
 
-  public function setSeat(int $seat) {
-    $this->seat = $p_seat;
+  public function setLugaggeFranchise(int $t_lugagge_franchise) : void {
+    $this->lugagge_franchise = $t_lugagge_franchise;
   }
 
-  public function setConnections(array $connections) {
-    $this->connections = $p_connections;
+  public function setSeat(int $t_seat) : void {
+    $this->seat = $t_seat;
   }
 
-  public function setFlights(array $flights) {
-    $this->flights = $p_flights;
+  public function setConnections(array $t_connections) : void {
+    $this->connections = $t_connections;
   }
 
-  public function setStatus(ticket_status $status) {
+  public function setFlights(array $t_flights) : void {
+    $this->flights = $t_flights;
+  }
+
+  public function setStatus(ticket_status $t_status) : void {
     $this->status = ticket_status::ticket_acquired;
   }
 
   //Methods
   static public function getFilename()  {
-      return get_called_class()::$local_filename;
+    return get_called_class()::$local_filename;
   }
-  public function setTicketCode(string $travel_code, int $seat){
-    return this->ticket_code = travel_code().str_pad ( $seat, 3, "0", STR_PAD_LEFT);
+  public function setTicketCode(string $travel_code, int $seat) : string{
+    return this->ticket_code = travel_code().str_pad ( $seat, 3, "0",     
+  STR_PAD_LEFT);
   }
 
-  public function addPrices(/*int $travel_price, int $connection_price*/,int $lugagge_franchise, int $lugagge_price){
+  public function addPrices(/*int $travel_price, int $connection_price*/,int $lugagge_franchise, int $lugagge_price) :int{
     return this->value = /*$travel_price + $connection_price() +*/ $lugagge_franchise*$lugagge_price;
   }
 
-  public function change_status() {
+  public function change_status() :void{
     $input = readline();
     if($input == "Passenger inside the plane"){
       $ticket->setStatus(ticket_status::board_plane);
