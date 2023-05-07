@@ -1,44 +1,10 @@
 <?php
-/*
--------------------------------- INSTRUÇÕES --------------------------------
 
-Para melhorar a organização , siga o exemplo do arquivo Airport.php 
-e ordene o código em: atributos, construtor, destrutor e métodos (em 
-ordem getters, setters, funções), indicando com comentários a localização 
-de cada parte do código. Além disso, comente as funções e atributos, 
-explicando sucintamente a sua funcionalidade e observações.
-
-Também se atente às TABULAÇÔES!!
-
-Para este arquivo, segundo a UML, é necessário:
-
-- ticket_code: int 
-- arrival: Airport
-- departure: Airport
-- travel: Travel
-- connection: Travel
-- client: Client
-- passenger: Passenger
-- value: int PASSAGEN TRAVEL + CONEXAO + LUGGAGE
-- seat: int
-- connection_seat: int
-- luggage_franchise: int
-- ticket_status: enum; POSSIBILIDADES DE ACORDO COM PEDIDO DO PROFESSOR
-
-
-+ set_ticket_code(): string TRAVEL CODE + SEAT (3 DIGITOS) [X]
-+ buy_luggage_franchise(int): void [X]
-+ change_status(string): void MUDA O ENUM DE STATUS DO TICKET [X]
-+ add_prices (): void SOMA TRAVEL + CONNECTION + LUGGAGE [X]
-
-*/
-include_once("Global.php")
-
+include_once("Global.php");
 
 class Ticket extends Persist {
   
-  enum ticket_status
-  {
+  enum ticket_status {
     case ticket_acquired;
     case ticket_cancelled;
     case check_in;
@@ -56,8 +22,7 @@ class Ticket extends Persist {
       }
     }
 
-  //Properties
-  private bool $vip_status;
+//Properties
   private string $ticketcode;
   private Airport $arrival;
   private Airport $departure;
@@ -70,45 +35,39 @@ class Ticket extends Persist {
   private int $luggage_franchise;
   private int $travel_seat;
   private int $connection_seat;
-  private array $connections;
-  private array $flights;
   private $status;
   protected static $local_filename = "Ticket.txt";
 
-  //Constructor
-  public function __construct(bool $p_vip_status, string $p_ticketcode, Airport $p_arrival, Airport $p_departure, Travel $p_travel, Travel $p_connection, Client $p_client, Passenger $p_passenger = null, Passenger_VIP $p_passenger_vip = null, int $p_value, int $p_luggage_franchise = 0, int $p_seat, array $p_connections [], array $p_flights []) {
 
-  $this->vip_status = $p_vip_status;
-  $this->passenger_vip = $p_passenger_vip;
-  $this->passenger = $p_passenger;
-  $this->ticketcode = this->$setTicketCode;
-  $this->arrival = $p_arrival;
-  $this->departure = $p_departure;
-  $this->travel = $p_travel;
-  $this->connection = $p_connection;
-  $this->client = $p_client;
-  $this->value = $p_value;
-  $this->luggage_franchise = $p_luggage_franchise;
-  $this->travel_seat = $p_travel_seat;
-  $this->connection_seat = $p_connection_seat;
-  $this->connections = $p_connections;
-  $this->flights = $p_flights;
+//Constructor
+  public function __construct(string $p_ticketcode, Airport $p_arrival, Airport $p_departure, 
+                              Travel $p_travel, Travel $p_connection = NULL , Client $p_client, 
+                              Passenger $p_passenger = NULL, Passenger_VIP $p_passenger_vip = NULL, 
+                              int $p_value, int $p_luggage_franchise = 0, int $p_t_seat, int $p_c_seat){
+      
+    $this->vip_status = $p_vip_status;
+    $this->passenger_vip = $p_passenger_vip;
+    $this->passenger = $p_passenger;
+    $this->ticketcode = this->$setTicketCode;
+    $this->arrival = $p_arrival;
+    $this->departure = $p_departure;
+    $this->travel = $p_travel;
+    $this->connection = $p_connection;
+    $this->client = $p_client;
+    $this->value = $p_value;
+    $this->luggage_franchise = $p_luggage_franchise;
+    $this->travel_seat = $p_travel_seat;
+    $this->connection_seat = $p_connection_seat;
+    $this->connections = $p_connections;
+    $this->flights = $p_flights;
   }
 
-  public function buy_luggage_franchise(int $p_luggage_number){
-     if ($p_luggage_number > 0  && $p_luggage_number <= 3){
-       $this->$luggage_franchise += $p_luggage_number;
-     }else{
-       echo "Invalid quantity.";
-     }       
+//Destructor
+  public function __destruct() {
   }
 
-  //Getters
-  public function getVip_status(): bool{
-    return $this->vip_status;
-  }
-
-  public function getTicketCode():string{
+//Getters
+  public function getTicket_code():string{
     return $this->ticketcode;
   }
 
@@ -120,115 +79,104 @@ class Ticket extends Persist {
     return $this->departure;
   }
 
+  public function getTravel():Travel{
+    return $this->travel;
+  }
+
+  public function getConnection():Travel{
+    return $this->connection;
+  }
+
   public function getClient():Client{
     return $this->client;
+  }
+  
+  public function getPassenger_vip():Passenger_VIP{
+    return $this->passenger_vip;
   }
 
   public function getPassenger():Passenger{
     return $this->passenger;
   }
 
-  public function getPassenger_vip():Passenger_VIP{
-    return $this->passenger_vip;
-  }
-
   public function getValue():int{
     return $this->value;
   }
 
-  public function getLuggageFranchise():int{
-    return $this->luggage_franchise;
-  }
-
-  public function getSeat():int{
+  public function getLuggage_franchise():int{
     return $this->seat;
   }
 
-  public function getConnections():array{
-    return $this->connections;
+  public function getTravel_seat():int{
+    return $this->seat;
   }
 
-  public function getFlights():array{
-    return $this->flights;
+  public function getConnection_seat():int{
+    return $this->seat;
   }
 
-  //public function getStatus():enum{
-  //  return this->status;
-  //}
-
-  //Setters
-
-  public function setVip_status (bool $t_vip_status) : void {
-    $this->vip_status = $t_vip_status;
+//Setters
+  public function setTicket_code(string $p_ticket_code): void {
+    $this->ticketcode = $p_ticket_code;
   }
 
-  public function setArrival(Airport $t_arrival) : void {
-    $this->arrival = $t_arrival;
+  public function setArrival(Airport $p_arrival): void {
+      $this->arrival = $p_arrival;
   }
 
-  public function setDeparture(Airport $t_departure) : void {
-    $this->departure = $t_departure;
+  public function setDeparture(Airport $p_departure): void {
+      $this->departure = $p_departure;
   }
 
-  public function setTravel(Travel $t_travel) : void {
-    $this->travel = $t_travel;
+  public function setTravel(Travel $p_travel): void {
+      $this->travel = $p_travel;
   }
 
-  public function setConnection(Travel $t_connection) : void {
-    $this->connection = $t_connection;
+  public function setConnection(Travel $p_connection): void {
+      $this->connection = $p_connection;
   }
 
-  public function setConnection(Travel $t_connection) : void {
-    $this->connection = $t_connection;
+  public function setClient(Client $p_client): void {
+      $this->client = $p_client;
   }
 
-  public function setClient(Client $t_client) : void {
-    $this->client = $t_client;
+  public function setPassenger_vip(Passenger_VIP $p_passenger_vip): void {
+      $this->passenger_vip = $p_passenger_vip;
   }
 
-  public function setPassenger(Passenger $t_passenger) : void {
-    $this->passenger = $p_passenger;
+  public function setPassenger(Passenger $p_passenger): void {
+      $this->passenger = $p_passenger;
   }
 
-  public function setPassenger_vip(Passenger $t_passenger_vip) : void {
-    $this->passenger_vip = $p_passenger_vip;
+  public function setValue(int $p_value): void {
+      $this->value = $p_value;
   }
 
-  public function setValue(int $t_value) : void{
-    $this->value = $t_value;
+  public function setLuggage_franchise(int $p_luggage_franchise): void {
+      $this->luggage_franchise = $p_luggage_franchise;
   }
 
-  public function setLugaggeFranchise(int $t_lugagge_franchise) : void {
-    $this->lugagge_franchise = $t_lugagge_franchise;
+  public function setTravel_seat(int $p_travel_seat): void {
+      $this->travel_seat = $p_travel_seat;
   }
 
-  public function setSeat(int $t_seat) : void {
-    $this->seat = $t_seat;
+  public function setConnection_seat(int $p_connection_seat): void {
+      $this->connection_seat = $p_connection_seat;
   }
 
-  public function setConnections(array $t_connections) : void {
-    $this->connections = $t_connections;
-  }
 
-  public function setFlights(array $t_flights) : void {
-    $this->flights = $t_flights;
-  }
-
-  public function setStatus(ticket_status $t_status) : void {
-    $this->status = ticket_status::ticket_acquired;
-  }
-
-  //Methods
+//Methods
   static public function getFilename()  {
-    return get_called_class()::$local_filename;
+      return get_called_class()::$local_filename;
   }
-  public function setTicketCode(string $travel_code, int $seat) : string{
-    return this->ticket_code = travel_code().str_pad ( $seat, 3, "0",     
-  STR_PAD_LEFT);
+  public function creat_ticket_code(string $travel_code, int $seat) : string{
+    return this->ticket_code = travel_code().str_pad ($seat, 3, "0", STR_PAD_LEFT);
   }
 
-  public function addPrices(/*int $travel_price, int $connection_price*/,int $lugagge_franchise, int $lugagge_price) :int{
-    return this->value = /*$travel_price + $connection_price() +*/ $lugagge_franchise*$lugagge_price;
+  public function full_price() :int{
+    return $this->travel.getSeatPrice() +
+           $this->connection.getSeatPrice() +
+           $this->getLuggage_franchise() * $this->travel.getFlight().getCompany().getLuggagePrice();
   }
 
   public function change_status() :void{
@@ -246,8 +194,15 @@ class Ticket extends Persist {
     {
       $ticket->setStatus(ticket_status::no_show);
     }
-    
-}  
+  }
+
+  public function passenger_is_vip(): bool{ //Retorna se o passageiro é vip
+    if($this->getPassenger_vip == null){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
   
 }
